@@ -147,13 +147,15 @@ search_replies = {
     "Old Folder": [
         [ # Success
             "You found a dank meme",
-            "You found a old tik tok",
-            ""
+            "You found an old tik tok",
+            "You found a macroscript you made a while ago",
+            "You found an old file"
         ],
         [ # Fail
             "You opened a troll virus that shut down your computer.",
             "You found Free_Nitro_2017_[100% LEGIT].mp4",
-            ""
+            "Your computer froze.",
+            "Your computer crashed."
         ]
     ],
     "Carl": [
@@ -167,6 +169,10 @@ search_replies = {
 users_inv = {}
 users_bal = {}
 users_data = {}
+
+# Here we have all the cooldown dictionaries...
+command_cooldowns = {}
+streak_cooldowns = {}
 
 for user in users.find():
     users_inv.update({
@@ -198,7 +204,17 @@ for user in users.find():
     users_data.update({
         user["_id"]: {
             "patron": user["patron"],
-            "proper": user["proper"]
+            "proper": user["proper"],
+            "streaks": {
+                "hourly": {
+                    "streak": None,
+                    "unix": 0
+                },
+                "daily": {
+                    "streak": None,
+                    "unix": 0
+                }
+            }
         }
     })
 
@@ -252,6 +268,15 @@ def create_beg(_id_):
     image_text.text((10, 30), "This is a test", font=medium)
 
     image.save('finished/beg_image.png')
+
+def cooldown_check(_id_, type):
+    """Basic cooldown checker, checks a cooldown against a given user + type will update data accordingly if needed
+    Types are for every endpoint, if the type is daily or hourly we do a special func with it"""
+
+    if type == "daily":
+        pass
+    elif type == "hourly":
+        pass
 
 app = Flask('')
 

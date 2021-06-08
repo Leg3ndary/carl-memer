@@ -13,8 +13,10 @@ Basically anyone can gamble all your money if I added it... :(
 
 **Tag Usage**
 ```asciidoc
-= ?d beg | ?d search | ?d pickup =
+= ?d beg/search/pickup =
 [ Beg, Search or Pickup Money ]
 = ?d shop =
-[  ]
+[ Show the shop ]
+= ?d buy/sell item amount =
+[ Buy or Sell Items]
 ```
