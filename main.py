@@ -65,7 +65,7 @@ Command not found, just an error image saying the command wasn't found
 
 Read stuff under here if you want, I won't explain any of it really further"""
 
-# Mongo DB shit, env-ing pass and user so people can't access the db :p 
+# Mongo DB stuff, env-ing pass and user so people can't access the db :p 
 pymongo_client = pymongo.MongoClient(f"mongodb+srv://{os.environ['MongoUser']}:{os.environ['MongoPass']}@dankmemer.ntbr7.mongodb.net/database?retryWrites=true&w=majority")
 
 # assigning collections and the actual database
@@ -224,19 +224,11 @@ font_dict = {
 }
 
 # Functions
-def get_font(type, size=25):
-    """We have many fonts available too us, so to simplify things we got a nice simple get function to retrieve fonts for us
-    Though currently we only use 2 of them :p"""
-    if type not in font_dict:
-        return None
-    font = ImageFont.truetype(font_dict[type], size)
-    return font
-
 def user_check(_id_):
     """Checking userid against built cache, tells us if we need to open up a new account or just keep going"""
     if str(_id_) in dict:
         return True
-    # Do stuff here
+    # Add User to our Database
     return False
 
 def uib_check(_id_, utime):
@@ -254,20 +246,6 @@ def uib_check(_id_, utime):
         pass
 
     return True
-
-def create_beg(_id_):
-    """Stuff"""
-    image = Image.open("images/create_beg.png")
-    
-    medium = get_font("medium")
-    bold = get_font("bold")
-    
-    image_text = ImageDraw.Draw(image)
-
-    image_text.text((10, 5), "Pls Beg", font=bold)
-    image_text.text((10, 30), "This is a test", font=medium)
-
-    image.save('finished/beg_image.png')
 
 def cooldown_check(_id_, type):
     """Basic cooldown checker, checks a cooldown against a given user + type will update data accordingly if needed
@@ -338,25 +316,9 @@ server.start()
 
 async def keep_alive():
     """A coroutine to keep the api alive, hopefully...
-    Doesn't always work"""
+    Doesn't always work, not even sure if this is correct syntax but it works :p"""
     while 1:
         urllib.request.urlopen("https://carlmemer.tagscript1.repl.co")
-        await asyncio.sleep(300)
+        await asyncio.sleep(150) # 150 Seconds or 2:30 min, sec
 
 keep_alive()
-
-
-
-def hi(check_word, word):
-    final_word = check_word(word)
-    width_o, height_o = (498, 498)
-
-    carls_beautiful_shell = Image.open("images/Shell_Carl.png")
-    font = ImageFont.truetype('FreeSans.ttf', 100)
-
-    keeping_shell_safe = ImageDraw.Draw(carls_beautiful_shell)
-
-    width_n, height_n = keeping_shell_safe.textsize(final_word, font=font)
-    keeping_shell_safe.text(((width_o-width_n)/2,(height_o-height_n)/2), final_word, font=font, fill=(255, 255, 255))
-
-    carls_beautiful_shell.save("dirty_shell.png")
