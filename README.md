@@ -5,10 +5,89 @@ This project is not supported by either Carl-bot or Dank Memer, this is simply a
 
 This tag will be free to import with Carl-bot from discord: `ADD IMPORT LINK AND SHIT HERE LATER`
 
+### API Endpoints
+In essence this is creating an API so I might as well tell you its endpoints not that it would do much
+
+**API Endpoints** 
+```
+https://carlmemer.tagscript1.repl.co/
+```
+Shows wether the api endpoint is alive and working...
+This is the base URL    
+
+**Actual Endpoints**
+==========================
+```
+/beg/userid/unix
+```
+Beg command, classic
+
+```
+/search/userid/unix
+```
+Search command, sadly we cannot await options as we only really have one oppurtunity or request if you will :p
+
+```
+/pickup/userid/unix
+```
+Pickup command, just another way to earn money
+
+```
+/shop/unix/page_number
+```
+Shows shop with given page_number
+
+```
+/info/userid/unix/object
+```
+View an item, another player, you're profile... Up to you
+
+```
+/inv/userid/unix/page_number
+```
+View your inventory which also includes a page_number
+
+```
+/buy/userid/unix/item/amount
+```
+Buy something, simple.
+
+```
+/sell/userid/unix/item/amount
+```
+Sell something, extremely difficult.
+
+```
+/use/userid/unix/item
+```
+Use an item... What else
+
+```
+/hourly/userid/unix
+```
+Hourly command to get your hourly reward since I need more ways to get money
+
+```
+/daily/userid/unix
+```
+Daily Command to get your daily reward since we still need more ways to get money
+
+```
+/leaderboards/unix/type
+```
+Leaderboards for the following types, Wallet Bal, Bank Bal, Bank Space
+
+Error/Testing Endpoints
+==========================
+/cnf/unix/command
+Command not found, just an error image saying the command wasn't found
+
+Read stuff under here if you want, I won't explain any of it really further
+
 ### Setup/Installation
 This is not meant for you to setup nor install, it will be complicated and tedious, however for those of you who want to try and setup this I will not stop you. Please don't ask for help though as I thoroughly think you shouldn't try it.
 
-###### Steps: 
+**Steps:** 
 1. You need a web server, I just used repl.it for simplicity
 2. Install of the imports you don't have already, if you do use repl.it keep the os.system messages as repl.it will delete your packages
 3. You will need a pymongo account, create one.

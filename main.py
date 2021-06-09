@@ -12,59 +12,6 @@ import pymongo
 # Because repl sucks we need to make sure packages are installed
 os.system("pip install pymongo[srv]")
 
-""" Everything you need to know...
-This project is not affiliated with either Dank Memer or Carl-bot neither is it supported by either, this is just for a tag and my curiosity.
-
-API Endpoints... 
-https://carlmemer.tagscript1.repl.co
-The above shows wether the api endpoint is alive and working...
-This is the base URL    
-
-Actual Endpoints...
-==========================
-/beg/userid/unix
-Beg command, classic
-
-/search/userid/unix
-Search command, sadly we cannot await options as we only really have one oppurtunity or request if you will :p
-
-/pickup/userid/unix
-Pickup command, just another way to earn money
-
-/shop/unix/page_number
-Shows shop with given page_number
-
-/info/userid/unix/object
-View an item, another player, you're profile... Up to you
-
-/inv/userid/unix/page_number
-View your inventory which also includes a page_number
-
-/buy/userid/unix/item/amount
-Buy something, simple.
-
-/sell/userid/unix/item/amount
-Sell something, extremely difficult.
-
-/use/userid/unix/item
-Use an item... What else
-
-/hourly/userid/unix
-Hourly command to get your hourly reward since I need more ways to get money
-
-/daily/userid/unix
-Daily Command to get your daily reward since we still need more ways to get money
-
-/leaderboards/unix/type
-Leaderboards for the following types, Wallet Bal, Bank Bal, Bank Space
-
-Error/Testing Endpoints
-==========================
-/cnf/unix/command
-Command not found, just an error image saying the command wasn't found
-
-Read stuff under here if you want, I won't explain any of it really further"""
-
 # Mongo DB stuff, env-ing pass and user so people can't access the db :p 
 pymongo_client = pymongo.MongoClient(f"mongodb+srv://{os.environ['MongoUser']}:{os.environ['MongoPass']}@dankmemer.ntbr7.mongodb.net/database?retryWrites=true&w=majority")
 
