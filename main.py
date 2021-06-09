@@ -270,7 +270,6 @@ def beg(id, unix):
     if uib_check(id, unix) is False: # Yes I know I can use not
         return "Tag has been altered. Will not work"
     else:
-        beg_image = create_beg(id)
         return send_file("finished/beg_image")
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
