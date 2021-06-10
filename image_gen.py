@@ -10,7 +10,7 @@ font_dict = { # just a small dict so we can add fonts quickly without much fuss 
     "light": "fonts/light.otf"
 }
 
-def get_font(type, size=15):
+def get_font(type, size=18):
     """We have many fonts available too us, so to simplify things we got a nice simple get function to retrieve fonts for us
     Though currently we only use 2 of them :p"""
     if type not in font_dict:
@@ -18,26 +18,30 @@ def get_font(type, size=15):
     font = ImageFont.truetype(font_dict[type], size)
     return font
 
-def clear_background():
+def create_canvas(size=(400, 300)):
     """Clear the background or make a new canvas, call it what you want
-    does the same thing, just if I accidently overwrite existing canvas"""
-    blank = Image.new(mode="RGBA", size=(400, 300), color=(48,52,52,0))
+    does the same thing, used to generate new size canvases for better image creation"""
+    blank = Image.new(mode="RGBA", size=size, color=(48, 52, 52, 0))
     blank.save("images/blank_canvas.png")
 
-def create_basic(filepath, thumbnail, title, *description):
+def create_image(filepath, thumbnail, title, *description):
     """Here we create a basic "embed" as you might call it...
     This will be a basic template that we can use"""
+
+    # Here we determine the canvas size that we'll actually need and then create/update it
+    create_canvas(size=(400, 20 + (len(description) * 18)))
+
     canvas = Image.open("images/blank_canvas.png")
 
     semibold = get_font("semibold")
     light = get_font("light")
     
     canvas_write = ImageDraw.Draw(canvas)
-    canvas_write.text((0, 0), title, font=semibold)
-    line_distance = 10
+    canvas_write.text((0, -5), title, font=semibold)
+    line_distance = 20
     for line in description:
-        line_distance += 15
         canvas_write.text((0, line_distance), line, font=light)
+        line_distance += 18
 
     if thumbnail is not None:
         pass # we have to add this later :p
