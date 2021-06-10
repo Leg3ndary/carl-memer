@@ -48,7 +48,6 @@ def create_image(filepath, thumbnail, title, *description):
 
     canvas.save(filepath)
 
-
 def create_beg(_id_):
     """Stuff"""
     image = Image.open("images/create_beg.png")
@@ -62,5 +61,3 @@ def create_beg(_id_):
     image_text.text((10, 30), "This is a test", font=medium)
 
     image.save('finished/beg_image.png')
-
-clear_background()
