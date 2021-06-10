@@ -16,7 +16,6 @@ Shows wether the api endpoint is alive and working...
 This is the base URL    
 
 **Actual Endpoints**
-==========================
 ```
 /beg/userid/unix
 ```
@@ -78,8 +77,9 @@ Daily Command to get your daily reward since we still need more ways to get mone
 Leaderboards for the following types, Wallet Bal, Bank Bal, Bank Space
 
 Error/Testing Endpoints
-==========================
+```
 /cnf/unix/command
+```
 Command not found, just an error image saying the command wasn't found
 
 Read stuff under here if you want, I won't explain any of it really further
