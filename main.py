@@ -169,26 +169,28 @@ font_dict = {
 }
 
 # Functions
-def user_check(_id_):
-    """Checking userid against built cache, tells us if we need to open up a new account or just keep going"""
-    if str(_id_) in dict:
-        return True
-    
-    return False
-
-def uib_check(_id_, utime):
+def uib_check(_id_, utime): # Unix Id Ban Check :P UIB
     """Comparing the current unix to the time given, helps deter people who aren't using everything properly
     Rounds unix and checks if its off by 4 or negative, if it doesn't match returns false, else returns true
     We also check the id, all valid discord user snowflakes are 17 or 18 digits.
     
     Finally we also have to check if the user's been banned for being a bad boy >:L"""
     time_diff = round(time.time())-utime
-    if time_diff > 4 or time_diff < 0 or len(str(_id_)) not in [17, 18]:
+    if time_diff > 4 or time_diff < 0:
+        # Time difference was too short
+        return False
+
+    elif len(str(_id_)) not in [17, 18]:
+        # Length of id was too short
+        return False
+
+    elif str(_id_) not in dict:
+        # Id wasn't found in dict just make sure we add it and display a welcome message
         return False
 
     elif users_data.get("banned"):
-        """Add an image"""
-        pass
+        # user was banned for being stupid
+        return False
 
     return True
 
