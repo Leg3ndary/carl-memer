@@ -14,8 +14,6 @@ os.system("pip install pymongo[srv]")
 
 # Mongo DB stuff, env-ing pass and user so people can't access the db :p 
 pymongo_client = pymongo.MongoClient(f"mongodb+srv://{os.environ['MongoUser']}:{os.environ['MongoPass']}@dankmemer.ntbr7.mongodb.net/database?retryWrites=true&w=majority")
-
-# assigning collections and the actual database
 database = pymongo_client["users_db"]
 users = database["users"]
 
@@ -175,7 +173,7 @@ def user_check(_id_):
     """Checking userid against built cache, tells us if we need to open up a new account or just keep going"""
     if str(_id_) in dict:
         return True
-    # Add User to our Database
+    
     return False
 
 def uib_check(_id_, utime):
@@ -207,9 +205,9 @@ app = Flask('')
 
 @app.route('/')	
 def home():
-	return jsonify(
-        {"status": "API Alive"}
-    )  
+	return {
+        "status": "API Alive"
+        }
 
 # Basic Beg Command, we request the id and the users proper without the # finally we take the unix to try and defer bots
 @app.route('/beg/<int:id>/<int:unix>', methods=['GET']) # Technically we don't need to use a list for this but it looks cool so :p
