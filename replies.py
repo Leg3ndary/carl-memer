@@ -20,10 +20,10 @@ beg_replies = {
     },
     "Discord Mod": {
         "success": [
-            ""
+            "I like you, sure"
         ],
         "fail": [
-            ""
+            "I hate you, loser"
         ]
     }
 }
@@ -107,7 +107,7 @@ def get_reply(r_type: str, wrap=290):
 
     person_place = random.choice(list(reply_dict))
     outcome = random.choice(["success", "fail"])
-    description = textwrap.wrap(random.choice(person_place[outcome]), wrap) # Reformatting everything so we can use it perfectly!
+    description = textwrap.wrap(random.choice(reply_dict[person_place][outcome]), wrap) # Reformatting everything so we can use it perfectly!
 
     final_dict = {
         "output": {
