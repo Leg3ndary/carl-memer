@@ -109,7 +109,10 @@ def get_reply(r_type: str, wrap):
     description = textwrap.wrap(random.choice(person_place[outcome]), wrap) # Reformatting everything so we can use it perfectly!
 
     final_dict = {
-        person_place: description,
+        "output": {
+            "person_place": person_place,
+            "description": description
+        },
         "outcome": outcome
     }
     
