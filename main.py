@@ -193,13 +193,6 @@ def search(id, unix):
     else:
         return "Approved, do stuff"
 
-@app.route('/bet/<int:id>/<int:unix>/<string:code>/<int:amount>', methods=['GET'])
-def bet(id, unix, code, amount):
-    if uib_check(id, unix) is False:
-        return "Tag has been altered. Will not work"
-    else:
-        return "Approved, do stuff"
-
 @app.route('/shop/<int:unix>/<int:page_number>', methods=['GET'])
 def shop(unix, page_number):
     if uib_check(id, unix) is False:
