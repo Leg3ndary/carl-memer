@@ -24,7 +24,7 @@ def create_canvas(size=(400, 300)):
     blank = Image.new(mode="RGBA", size=size, color=(48, 52, 52, 0))
     blank.save("images/blank_canvas.png")
 
-def create_image(filepath, thumbnail, title, *description):
+def create_image(filepath, thumbnail, title, description):
     """Here we create a basic "embed" as you might call it...
     This will be a basic template that we can use"""
 

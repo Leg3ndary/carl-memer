@@ -183,7 +183,7 @@ def beg(id, unix):
         return "Tag has been altered. Will not work"
     else:
         reply = replies.get_reply("beg", 290)
-        ig.create_image("finished/beg_image.png", None, reply["output"]["person_place"], "Description Line 1", "Line 2", "Line 3")
+        ig.create_image("finished/beg_image.png", None, reply["output"]["person_place"], reply["output"]["description"])
         return send_file("finished/beg_image")
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
