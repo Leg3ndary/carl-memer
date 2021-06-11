@@ -29,7 +29,7 @@ def create_image(filepath, thumbnail, title, description):
     This will be a basic template that we can use"""
 
     # Here we determine the canvas size that we'll actually need and then create/update it
-    create_canvas(size=(400, 20 + (len(description) * 18)))
+    create_canvas(size=(400, 24 + (len(description) * 18)))
 
     canvas = Image.open("images/blank_canvas.png")
 
