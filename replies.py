@@ -1,4 +1,5 @@
 import random
+import textwrap
 
 """Just reply shit
 Returns a dict with the reply and other data that we need :p"""
@@ -88,7 +89,7 @@ pickup_replies = {
 
 }
 
-def get_reply(r_type: str):
+def get_reply(r_type: str, wrap):
     r_type = r_type.lower()
     
     if r_type in ["beg"]:
@@ -105,9 +106,11 @@ def get_reply(r_type: str):
 
     person_place = random.choice(list(reply_dict))
     outcome = random.choice(["success", "fail"])
-    
+    description = textwrap.wrap(random.choice(person_place[outcome]), wrap) # Reformatting everything so we can use it perfectly!
+
     final_dict = {
-        str(person_place): str(random.choice(person_place[outcome])),
+        person_place: description,
         "outcome": outcome
     }
+    
     return final_dict
