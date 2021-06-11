@@ -94,14 +94,14 @@ for user in users.find():
             "Carl Crown": user["items"]["Carl Crown"],
             "Subway": user["items"]["Subway"],
             "Subway Coupon": user["items"]["Subway Coupon"],
-            "Normie triehipp": user["items"]["Normie triehifp"],
-            "God triehiup": user["items"]["God triehpfp"],
-            "carltriehpup": user["items"]["carltriehfup"],
+            "Normie triehipp": user["items"]["Normie Shell"],
+            "God triehiup": user["items"]["God Shell"],
+            "carltriehpup": user["items"]["Carl Shell"],
             "Pandas Chocolate": user["items"]["Pandas Chocolate"],
             "Astys Baguette": user["items"]["Astys Baguette"],
             "Oriels Neko": user["items"]["Oriels Neko"],
             "LPBs Brick": user["items"]["LPBs Brick"],
-            "Mooshs Moosh": user["items"]["LPBs Brick"]
+            "Mooshs Moosh": user["items"]["Mooshs Moosh"]
         }
     })
     users_bal.update({
