@@ -4,8 +4,10 @@ from threading import Thread
 import time
 import urllib
 import asyncio
-import image_gen as ig
 import pymongo
+
+import image_gen as ig
+import replies 
 
 # return send_file('errors/invalid_id.png')
 
