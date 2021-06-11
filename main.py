@@ -184,7 +184,7 @@ def beg(id, unix):
     else:
         reply = replies.get_reply("beg", 290)
         ig.create_image("finished/beg_image.png", None, reply["output"]["person_place"], reply["output"]["description"])
-        return send_file("finished/beg_image")
+        return send_file("finished/beg_image.png")
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
 def search(id, unix):
