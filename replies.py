@@ -89,7 +89,8 @@ pickup_replies = {
 
 }
 
-def get_reply(r_type: str, wrap):
+def get_reply(r_type: str, wrap=290):
+    """Gets a reply upon given type, also wraps text, default 290"""
     r_type = r_type.lower()
     
     if r_type in ["beg"]:
