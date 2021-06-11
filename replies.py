@@ -15,15 +15,51 @@ beg_replies = {
             "Boop, Beep, you are sheet",
             "I don't help peasants",
             "I don't help plastic litterers",
-            "Imagine begging a bot"
+            "Imagine begging a bot for cash"
         ],
     },
     "Discord Mod": {
         "success": [
-            "I like you, sure"
+            "I like you, sure",
+            "I'm feeling generous, fine"
         ],
         "fail": [
-            "I hate you, loser"
+            "I hate you, loser",
+            "Get banned",
+            "No one likes you, go away",
+            "Stop breaking TOS, go away"
+        ]
+    },
+    "God": {
+        "success": [
+            "Fine, leave me alone, I'm busy",
+            ""
+        ],
+        "fail": [
+            'I said "Let there be light" not beggars',
+            "I'm don't have any change sorry"
+        ]
+    },
+    "Old Friend": {
+        "success": [
+            "Sure, sure, I can hook you up",
+            ""
+        ],
+        "fail": [
+            "Who are you again...",
+            "Ahhh, uh, Bob was it?",
+            "I don't give money to strangers"
+        ]
+    },
+    "Dev Carl": {
+        "success": [
+            "Spread the wealth... I guess",
+            "Buy me some subway later"
+        ],
+        "fail": [
+            "I'm busy working on a rewrite, go away",
+            "I'm keeping my Bot company, leave us alone",
+            "Stop pinging me"
         ]
     }
 }
