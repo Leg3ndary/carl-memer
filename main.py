@@ -6,7 +6,7 @@ from threading import Thread
 import time
 import urllib
 import asyncio
-import pymongo
+
 
 import image_gen as ig
 import replies 
@@ -14,7 +14,11 @@ import replies
 # return send_file('errors/invalid_id.png')
 
 # Because repl sucks we need to make sure packages are installed
-os.system("pip install pymongo[srv]")
+try:
+    import pymongo
+except:
+    os.system("pip install pymongo[srv]")
+    import pymongo
 
 # Mongo DB stuff, env-ing pass and user so people can't access the db :p 
 pymongo_client = pymongo.MongoClient(f"mongodb+srv://{os.environ['MongoUser']}:{os.environ['MongoPass']}@dankmemer.ntbr7.mongodb.net/database?retryWrites=true&w=majority")
@@ -233,6 +237,12 @@ async def keep_alive():
     Doesn't always work, not even sure if this is correct syntax but it works :p"""
     while 1:
         urllib.request.urlopen("https://carlmemer.tagscript1.repl.co")
+        try:
+            import pymongo
+        except:
+            os.system("pip install pymongo[srv]")
+            import pymongo
+
         await asyncio.sleep(150) # 150 Seconds or 2:30 min, sec
 
 keep_alive()
