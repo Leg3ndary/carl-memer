@@ -1,5 +1,7 @@
 import os
 from flask import Flask, send_file, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from threading import Thread
 import time
 import urllib
@@ -168,7 +170,13 @@ def cooldown_check(_id_, type):
     elif type == "hourly":
         pass
 
-app = Flask('')
+app = Flask(__name__)
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["4/second"]
+)
 
 @app.route('/')	
 def home():
