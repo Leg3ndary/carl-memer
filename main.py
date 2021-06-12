@@ -182,7 +182,7 @@ def beg(id, unix):
     if uib_check(id, unix) is False: # Yes I know I can use not
         return "Tag has been altered. Will not work"
     else:
-        reply = replies.get_reply("beg", 290)
+        reply = replies.get_reply("beg")
         ig.create_image("finished/beg_image.png", None, reply["output"]["person_place"], reply["output"]["description"])
         return send_file("finished/beg_image.png")
 

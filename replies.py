@@ -125,7 +125,7 @@ pickup_replies = {
 
 }
 
-def get_reply(r_type: str, wrap=290):
+def get_reply(r_type: str, wrap=48):
     """Gets a reply upon given type, also wraps text, default 290"""
     r_type = r_type.lower()
     
