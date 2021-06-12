@@ -12,7 +12,6 @@ pymongo_client = pymongo.MongoClient(f"mongodb+srv://{os.environ['MongoUser']}:{
 database = pymongo_client["users_db"]
 users = database["users"]
 
-
 # User Template, can be altered
 user_template = {
     "_id": "0",
@@ -121,3 +120,29 @@ for user in users.find():
             }
         }
     })
+
+
+# Functions that we'll actually use
+
+def get_price(item):
+    try:
+        item_price = shop[item]
+        
+    except:
+        # Item doesn't exist do shit
+        pass
+
+def update_bal(_id_, bal_type, amount):
+    pass
+
+def get_bal(_id_, type=None):
+    pass
+
+def buy_item(_id_, item, amount):
+    pass
+
+def sell_item(_id_, item, amount):
+    pass
+
+def streak_magic(_id_, streak_type):
+    pass
