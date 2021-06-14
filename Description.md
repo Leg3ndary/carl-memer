@@ -1,8 +1,9 @@
+# Tag Description - As posted in Carl-bot Help
 __**~~Dank Memer~~ Carl Tag**__
 *This tag description is quite long so I've made this into 2 posts :P*
 
 **What**
-This tag is a totally original Dank Memer tag, totally not copied from a bot, anyways in basics this is an economy command.
+This tag is a totally original Dank Memer tag, totally not copied from a bot, anyways in basics this is a set economy commands
 
 Accessible from any server you have the basic commands, beg, a sort of search command, pickup command, hourly, daily.
 You also have a shop, buying selling and using of items...
@@ -20,3 +21,12 @@ Basically anyone can gamble all your money if I added it... :(
 = ?d buy/sell item amount =
 [ Buy or Sell Items]
 ```
+
+**Extra's**
+__**Attention Patrons**__ if you have the patron role in Carl-bot help, send a friend request to *_Leg3ndary#5759*, I will manually add it so you can have a shorter cooldown time...
+
+**Images**
+*Add images later :p*
+
+**Import Link**
+*Add import link later :p*
