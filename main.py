@@ -12,39 +12,14 @@ import replies
 import cache
 
 # Functions
-def uib_check(_id_, utime): # Unix Id Ban Check :P UIB
-    """Comparing the current unix to the time given, helps deter people who aren't using everything properly
-    Rounds unix and checks if its off by 4 or negative, if it doesn't match returns false, else returns true
-    We also check the id, all valid discord user snowflakes are 17 or 18 digits.
-    
-    Finally we also have to check if the user's been banned for being a bad boy >:L"""
-    time_diff = round(time.time())-utime
-    if time_diff > 4 or time_diff < 0:
-        # Time difference was too short
-        return False
-
-    elif len(str(_id_)) not in [17, 18]:
-        # Length of id was too short
-        return False
-
-    elif str(_id_) not in dict:
-        # Id wasn't found in dict just make sure we add it and display a welcome message
-        return False
-
-    #elif users_data.get("banned"):
-        # user was banned for being stupid
-        #return False
-
-    return True
-
 def cooldown_check(_id_, type):
     """Basic cooldown checker, checks a cooldown against a given user + type will update data accordingly if needed
     Types are for every endpoint, if the type is daily or hourly we do a special func with it"""
 
     if type == "daily":
-        pass
+        return None
     elif type == "hourly":
-        pass
+        return None
 
 app = Flask(__name__)
 

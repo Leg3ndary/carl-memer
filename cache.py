@@ -123,26 +123,72 @@ for user in users.find():
 
 
 # Functions that we'll actually use
-
-def get_price(item):
+def get_price(item, amount):
+    """Get the price for an item multiplied by the amount the player is buying
+    it for"""
     try:
         item_price = shop[item]
-        
+        item_price *= amount
+        return item_price
     except:
-        # Item doesn't exist do shit
-        pass
+        return None
 
 def update_bal(_id_, bal_type, amount):
+    """Update the bal type for given id with given amount
+    Updates cache and database"""
     pass
 
-def get_bal(_id_, type=None):
+def get_bal(_id_, bal_type=None):
+    """Gets the bal of an id... If none returns a dict with all values"""
     pass
 
 def buy_item(_id_, item, amount):
+    """Buys items with an id, allows for more then one item"""
     pass
 
-def sell_item(_id_, item, amount):
+async def sell_item(_id_, item, amount):
+    """Sells items with an id, allows for more then one item"""
     pass
 
 def streak_magic(_id_, streak_type):
+    """Checks Streaks, updates it, etc"""
     pass
+
+def transfer_bal(_id_, action, amount=None):
+    """Action can be deposit and withdraw, if amount is None we assume they want to with/dep max
+    Just a simple cmd that makes stuff a bit faster"""
+    pass
+
+# Checks
+def check_time(unix_time):
+    """Comparing the current unix to the time given, helps deter people who aren't using everything properly
+    Rounds unix and checks if its off by 4 or negative, if it doesn't match returns false, else returns true"""
+    time_diff = round(time.time())-utime
+    if time_diff > 4 or time_diff < 0:
+        # Time difference was too short
+        return True
+    return False
+
+def check_snowflake(_id_):
+    """Also discord user ids are 17 or 18 digits long, if the given id isn't either tag's been altered
+    We could go even deeper and use the api to see if a valid id but that would slow the API down and it might be against tos
+    Idk :P"""
+    if len(str(_id_)) not in [17, 18]:
+        return True
+    return False
+
+def check_ban(_id_):
+    """Checking if user was banned for abusing api, what a loser tbh"""
+    pass    
+
+def basic_check(_id_, unix_time):
+    """Combining basic tag altering checks, might help in the future ig"""
+    if check_time(unix_time) or check_snowflake(_id_) is False:
+        return True
+    return False
+
+def check_user(_id_):
+    """Checking the user id in our db and doing stuff if we need to"""
+    if str(_id_) not in dict:
+        return True
+    return False
