@@ -21,12 +21,13 @@ def cooldown_check(_id_, type):
     elif type == "hourly":
         return None
 
+# Flask App Instance, I think thats what you call it 
 app = Flask(__name__)
 
 limiter = Limiter(
     app,
     key_func=get_remote_address,
-    default_limits=["4/second"]
+    default_limits=["4/second"] 
 )
 
 @app.route('/')	
