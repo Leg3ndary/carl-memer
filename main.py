@@ -38,7 +38,7 @@ def home():
 # Basic Beg Command, we request the id and the users proper without the # finally we take the unix to try and defer bots
 @app.route('/beg/<int:id>/<int:unix>', methods=['GET']) # Technically we don't need to use a list for this but it looks cool so :p
 def beg(id, unix):
-    if uib_check(id, unix) is False: # Yes I know I can use not
+    if cache.basic_check(id, unix): # Yes I know I can use not
         return "Tag has been altered. Will not work"
     else:
         reply = replies.get_reply("beg")
@@ -47,28 +47,28 @@ def beg(id, unix):
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
 def search(id, unix):
-    if uib_check(id, unix) is False:
+    if cache.basic_check(id, unix):
         return "Tag has been altered. Will not work"
     else:
         return "Approved, do stuff"
 
 @app.route('/shop/<int:unix>/<int:page_number>', methods=['GET'])
 def shop(unix, page_number):
-    if uib_check(id, unix) is False:
+    if cache.basic_check(id, unix):
         return "Tag has been altered. Will not work"
     else:
         return "Approved, do stuff"
 
 @app.route('/buy/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def buy(id, unix, item, amount):
-    if uib_check(id, unix) is False:
+    if cache.basic_check(id, unix):
         return "Tag has been altered. Will not work"
     else:
         return "Approved, do stuff"
 
 @app.route('/sell/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def sell(id, unix, item, amount):
-    if uib_check(id, unix) is False:
+    if cache.basic_check(id, unix):
         return "Tag has been altered. Will not work"
     else:
         return "Approved, do stuff"
