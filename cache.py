@@ -1,4 +1,5 @@
 import os
+import time
 
 # Because repl sucks we need to make sure packages are installed
 try:
@@ -163,7 +164,7 @@ def transfer_bal(_id_, action, amount=None):
 def check_time(unix_time):
     """Comparing the current unix to the time given, helps deter people who aren't using everything properly
     Rounds unix and checks if its off by 4 or negative, if it doesn't match returns false, else returns true"""
-    time_diff = round(time.time())-utime
+    time_diff = round(time.time())-unix_time
     if time_diff > 4 or time_diff < 0:
         # Time difference was too short
         return True
