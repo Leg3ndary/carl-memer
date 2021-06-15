@@ -25,8 +25,7 @@ def create_canvas(size=(400, 300)):
     blank.save("images/blank_canvas.png")
 
 def create_image(filepath, thumbnail, title, description):
-    """Here we create a basic "embed" as you might call it...
-    This will be a basic template that we can use"""
+    """Creating an image based on arguments, simple stuff"""
 
     # Here we determine the canvas size that we'll actually need and then create/update it
     create_canvas(size=(400, 24 + (len(description) * 18)))
