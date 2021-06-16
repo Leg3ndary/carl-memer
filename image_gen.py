@@ -25,7 +25,7 @@ def create_canvas(size=(400, 300)):
     blank.save("images/blank_canvas.png")
 
 def create_image(filepath, thumbnail, title, description):
-    """Creating an image based on arguments, simple stuff"""
+    """Creating an image to use, autoresizes to the size we need..."""
 
     # Here we determine the canvas size that we'll actually need and then create/update it
     create_canvas(size=(400, 24 + (len(description) * 18)))
