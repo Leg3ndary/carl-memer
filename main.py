@@ -36,11 +36,14 @@ def home():
         "status": "API Alive"
         }
 
-# Basic Beg Command, we request the id and the users proper without the # finally we take the unix to try and defer bots
 @app.route('/beg/<int:id>/<int:unix>', methods=['GET']) # Technically we don't need to use a list for this but it looks cool so :p
 def beg(id, unix):
-    if cache.basic_check(id, unix): # Yes I know I can use not
-        return "Tag has been altered. Will not work"
+    if cache.check_ban(id):
+        return send_file("errors/banned.png")
+    elif cache.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif cache.check_user(id):
+        return send_file("finished/new_user.png")
     else:
         reply = replies.get_reply("beg")
         ig.create_image("finished/beg_image.png", None, reply["output"]["person_place"], reply["output"]["description"])
@@ -48,29 +51,45 @@ def beg(id, unix):
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
 def search(id, unix):
-    if cache.basic_check(id, unix):
-        return "Tag has been altered. Will not work"
+    if cache.check_ban(id):
+        return send_file("errors/banned.png")
+    elif cache.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif cache.check_user(id):
+        return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/shop/<int:unix>/<int:page_number>', methods=['GET'])
 def shop(unix, page_number):
-    if cache.basic_check(id, unix):
-        return "Tag has been altered. Will not work"
+    if cache.check_ban(id):
+        return send_file("errors/banned.png")
+    elif cache.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif cache.check_user(id):
+        return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/buy/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def buy(id, unix, item, amount):
-    if cache.basic_check(id, unix):
-        return "Tag has been altered. Will not work"
+    if cache.check_ban(id):
+        return send_file("errors/banned.png")
+    elif cache.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif cache.check_user(id):
+        return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/sell/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def sell(id, unix, item, amount):
-    if cache.basic_check(id, unix):
-        return "Tag has been altered. Will not work"
+    if cache.check_ban(id):
+        return send_file("errors/banned.png")
+    elif cache.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif cache.check_user(id):
+        return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
