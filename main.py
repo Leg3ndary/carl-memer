@@ -93,6 +93,17 @@ def sell(id, unix, item, amount):
     else:
         return "Approved, do stuff"
 
+@app.route('/use/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
+def sell(id, unix, item, amount):
+    if cache.check_ban(id):
+        return send_file("errors/banned.png")
+    elif cache.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif cache.check_user(id):
+        return send_file("finished/new_user.png")
+    else:
+        return "Approved, do stuff"
+
 def run():
     app.run(host="0.0.0.0", port=8080)
 
