@@ -58,7 +58,7 @@ shop = {
     "Carl Coin": 62500, # trade item
     "Carl Medal": 1000000, # trade item
     "Carl Trophy": 5000000, # trade item
-    "Carl Crown": 25000000, # raises gambling
+    "Carl Crown": 25000000, # trade item
     "Subway": 10000, # gives u 5000-10000 bank space
     "Subway Coupon": 1000, # Trade in 5 for a Subway or sell...
     "Normie Shell": 10000, # box
@@ -141,13 +141,43 @@ def get_price(item, amount):
     except:
         return None
 
-def update_bal(_id_, bal_type, amount):
+def update_bal(_id_, action, bal_type, amount):
     """Update the bal type for given id with given amount
     Updates cache and database"""
-    pass
+    if bal_type.lower() not in ["wallet", "bank", "bankmax"]:
+        return None
+
+    if action.lower() == "add":
+        amount = users_bal[str(_id_)][bal_type] + amount
+
+    elif action.lower() == "remove":
+        amount = users_bal[str(_id_)][bal_type] - amount
+
+    else:
+        return None
+
+    if bal_type.lower() in ["wallet"]:
+        users_bal[str(_id_)]["wallet"] = amount
+        users_wallet = { "$set": { "wallet": amount } }
+        users.update_one({"_id": str(_id_)}, users_wallet)
+
+    elif bal_type.lower() in ["bank"]:
+        users_bal[str(_id_)]["bank"] = amount
+        users_wallet = { "$set": { "bank": amount } }
+        users.update_one({"_id": str(_id_)}, users_wallet)
+
+    elif bal_type.lower() in ["bankmax"]:
+        users_bal[str(_id_)]["bankmax"] = amount
+        users_wallet = { "$set": { "bankmax": amount } }
+        users.update_one({"_id": str(_id_)}, users_wallet)
+
 
 def get_bal(_id_, bal_type=None):
     """Gets the bal of an id... If none returns a dict with all values"""
+    pass
+
+def get_item(_id_, item):
+    """Returns data for a users items... We actually need this"""
     pass
 
 def buy_item(_id_, item, amount):
@@ -165,7 +195,6 @@ def streak_magic(_id_, streak_type):
 def transfer_bal(_id_, action, amount=None):
     """Action can be deposit and withdraw, if amount is None we assume they want to with/dep max
     Just a simple cmd that makes stuff a bit faster"""
-    pass
 
 # Creating Accounts
 async def create_account(_id_):
@@ -258,3 +287,18 @@ def check_user(_id_):
         ig.create_image("finished/new_user.png", None, "Welcome!", "Please wait a few seconds as your account's being created!")
         return True
     return False
+
+# Shells/Items
+"""We have to add chances/functions to add items/coins to the users data
+We do that here
+    "Subway": 10000, # gives u 5000-10000 bank space
+    "Subway Coupon": 1000, # Trade in 5 for a Subway or sell...
+    "Normie Shell": 10000, # box
+    "God Shell": 100000, # box
+    "Carl Shell": 1000000, # above three are boxes, what did ya expect
+"""
+usable_items = ["subway", "coupon", "normie", "god", "carl"]
+def use_item(_id_, item: str, amount):
+    if item.lower() not in usable_items:
+        return None
+
