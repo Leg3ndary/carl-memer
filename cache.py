@@ -174,7 +174,29 @@ def update_bal(_id_, action, bal_type, amount):
 
 def get_bal(_id_, bal_type=None):
     """Gets the bal of an id... If none returns a dict with all values"""
-    pass
+    if bal_type is None:
+        users_dumb_bal = {
+            "wallet": users_bal[str(_id_)]["wallet"],
+            "bank": users_bal[str(_id_)]["bank"],
+            "bankmax": users_bal[str(_id_)]["bankmax"]
+        }
+    
+    elif bal_type.lower() == "wallet":
+        users_dumb_bal = {
+            "wallet": users_bal[str(_id_)]["wallet"]
+        }
+    
+    elif bal_type.lower() == "bank":
+        users_dumb_bal = {
+            "bank": users_bal[str(_id_)]["bank"]
+        }
+    
+    elif bal_type.lower() == "bankmax":
+        users_dumb_bal = {
+            "bankmax": users_bal[str(_id_)]["bankmax"]
+        }
+    
+    return users_dumb_bal
 
 def get_item(_id_, item):
     """Returns data for a users items... We actually need this"""
