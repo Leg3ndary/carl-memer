@@ -24,11 +24,26 @@ def create_canvas(size=(400, 300)):
     blank = Image.new(mode="RGBA", size=size, color=(48, 52, 52, 0))
     blank.save("images/blank_canvas.png")
 
+def thumbnail_magic(thumbnail):
+    """Resizing thumbnail if the requested image isn't already the right shape"""
+    canvas = Image.open(thumbnail)
+
+    if canvas.size == (50, 50):
+        return
+
+    canvas_resize = canvas.resize((50,50))
+
+    canvas_resize.save(thumbnail) # voila done
+
 def create_image(filepath, thumbnail, title, description):
     """Creating an image to use, autoresizes to the size we need..."""
 
-    # Here we determine the canvas size that we'll actually need and then create/update it
-    create_canvas(size=(400, 24 + (len(description) * 18)))
+    y_canvas = 24 + (len(description) * 18)
+
+    if thumbnail is not None and y_canvas < 51:
+        y_canvas = 50
+
+    create_canvas(size=(400, y_canvas))
 
     canvas = Image.open("images/blank_canvas.png")
 
@@ -43,20 +58,12 @@ def create_image(filepath, thumbnail, title, description):
         line_distance += 18
 
     if thumbnail is not None:
-        pass # we have to add this later :p
+        thumbnail_magic(thumbnail)
+        t_image = Image.open(thumbnail)
+
+        canvas.paste(t_image, (50,0))
 
     canvas.save(filepath)
 
-def create_beg(_id_):
-    """Stuff"""
-    image = Image.open("images/create_beg.png")
-    
-    medium = get_font("medium")
-    bold = get_font("bold")
-    
-    image_text = ImageDraw.Draw(image)
-
-    image_text.text((10, 5), "Pls Beg", font=bold)
-    image_text.text((10, 30), "This is a test", font=medium)
-
-    image.save('finished/beg_image.png')
+def create_gif(filepath, thumbnail, ):
+    pass
