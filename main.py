@@ -3,15 +3,14 @@ from flask import Flask, send_file
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from threading import Thread
-import time
 import urllib
 import asyncio
+
 
 import image_gen as ig
 import replies 
 import cache
 
-# Functions
 def cooldown_check(_id_, type):
     """Basic cooldown checker, checks a cooldown against a given user + type will update data accordingly if needed
     Types are for every endpoint, if the type is daily or hourly we do a special func with it"""
@@ -24,11 +23,13 @@ def cooldown_check(_id_, type):
 # Flask App Instance, I think thats what you call it 
 app = Flask(__name__)
 
+# The Rate limiter
 limiter = Limiter(
     app,
     key_func=get_remote_address,
     default_limits=["4/second"] 
 )
+
 
 @app.route('/')	
 def home():
@@ -36,7 +37,7 @@ def home():
         "status": "API Alive"
         }
 
-@app.route('/beg/<int:id>/<int:unix>', methods=['GET']) # Technically we don't need to use a list for this but it looks cool so :p
+@app.route('/beg/<int:id>/<int:unix>', methods=['GET'])
 def beg(id, unix):
     if cache.check_ban(id):
         return send_file("errors/banned.png")
@@ -104,11 +105,16 @@ def sell(id, unix, item, amount):
     else:
         return "Approved, do stuff"
 
+
+
 def run():
+    """The run function that runs the app"""
     app.run(host="0.0.0.0", port=8080)
+
 
 server = Thread(target=run)
 server.start()
+
 
 async def keep_alive():
     """A coroutine to keep the api alive, hopefully...

@@ -61,7 +61,7 @@ def create_image(filepath, thumbnail, title, description):
         thumbnail_magic(thumbnail)
         t_image = Image.open(thumbnail)
 
-        canvas.paste(t_image, (50,0))
+        canvas.paste(t_image, (350,0))
 
     canvas.save(filepath)
 

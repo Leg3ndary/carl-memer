@@ -2,7 +2,7 @@ import os
 import time
 import image_gen as ig
 
-# Because repl sucks we need to make sure packages are installed
+# Because repl sucks we need to make sure packages are installed rest should be fine
 try:
     import pymongo
 except:
@@ -174,7 +174,7 @@ def update_bal(_id_, action, bal_type, amount):
 
 def get_bal(_id_, bal_type=None):
     """Gets the bal of an id... If none returns a dict with all values"""
-    if bal_type is None:
+    if not bal_type:
         users_dumb_bal = {
             "wallet": users_bal[str(_id_)]["wallet"],
             "bank": users_bal[str(_id_)]["bank"],
