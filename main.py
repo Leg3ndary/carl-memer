@@ -9,7 +9,7 @@ import asyncio
 
 import image_gen as ig
 import replies 
-import cache
+import data
 
 def cooldown_check(_id_, type):
     """Basic cooldown checker, checks a cooldown against a given user + type will update data accordingly if needed
@@ -39,11 +39,11 @@ def home():
 
 @app.route('/beg/<int:id>/<int:unix>', methods=['GET'])
 def beg(id, unix):
-    if cache.check_ban(id):
+    if data.check_ban(id):
         return send_file("errors/banned.png")
-    elif cache.basic_check(id, unix):
+    elif data.basic_check(id, unix):
         return send_file("errors/tag_altered.png")
-    elif cache.check_user(id):
+    elif data.check_user(id):
         return send_file("finished/new_user.png")
     else:
         reply = replies.get_reply("beg")
@@ -52,59 +52,58 @@ def beg(id, unix):
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
 def search(id, unix):
-    if cache.check_ban(id):
+    if data.check_ban(id):
         return send_file("errors/banned.png")
-    elif cache.basic_check(id, unix):
+    elif data.basic_check(id, unix):
         return send_file("errors/tag_altered.png")
-    elif cache.check_user(id):
+    elif data.check_user(id):
         return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/shop/<int:unix>/<int:page_number>', methods=['GET'])
 def shop(unix, page_number):
-    if cache.check_ban(id):
+    if data.check_ban(id):
         return send_file("errors/banned.png")
-    elif cache.basic_check(id, unix):
+    elif data.basic_check(id, unix):
         return send_file("errors/tag_altered.png")
-    elif cache.check_user(id):
+    elif data.check_user(id):
         return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/buy/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def buy(id, unix, item, amount):
-    if cache.check_ban(id):
+    if data.check_ban(id):
         return send_file("errors/banned.png")
-    elif cache.basic_check(id, unix):
+    elif data.basic_check(id, unix):
         return send_file("errors/tag_altered.png")
-    elif cache.check_user(id):
+    elif data.check_user(id):
         return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/sell/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def sell(id, unix, item, amount):
-    if cache.check_ban(id):
+    if data.check_ban(id):
         return send_file("errors/banned.png")
-    elif cache.basic_check(id, unix):
+    elif data.basic_check(id, unix):
         return send_file("errors/tag_altered.png")
-    elif cache.check_user(id):
+    elif data.check_user(id):
         return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
 
 @app.route('/use/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
 def sell(id, unix, item, amount):
-    if cache.check_ban(id):
+    if data.check_ban(id):
         return send_file("errors/banned.png")
-    elif cache.basic_check(id, unix):
+    elif data.basic_check(id, unix):
         return send_file("errors/tag_altered.png")
-    elif cache.check_user(id):
+    elif data.check_user(id):
         return send_file("finished/new_user.png")
     else:
         return "Approved, do stuff"
-
 
 
 def run():
