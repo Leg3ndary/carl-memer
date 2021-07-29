@@ -6,12 +6,11 @@ from threading import Thread
 import urllib
 import asyncio
 
-
 import image_gen as ig
 import replies 
 import data
 
-def cooldown_check(_id_, type):
+async def cooldown_check(_id_, type):
     """Basic cooldown checker, checks a cooldown against a given user + type will update data accordingly if needed
     Types are for every endpoint, if the type is daily or hourly we do a special func with it"""
 
@@ -20,25 +19,23 @@ def cooldown_check(_id_, type):
     elif type == "hourly":
         return None
 
-# Flask App Instance, I think thats what you call it 
+# Flask App Instance
 app = Flask(__name__)
 
-# The Rate limiter
 limiter = Limiter(
     app,
     key_func=get_remote_address,
-    default_limits=["4/second"] 
+    default_limits=["3/second"] 
 )
 
 
 @app.route('/')	
-def home():
-	return {
-        "status": "API Alive"
-        }
+async def home():
+	return {"status": "Alive"}
 
 @app.route('/beg/<int:id>/<int:unix>', methods=['GET'])
-def beg(id, unix):
+async def beg(id, unix):
+    """The beg command"""
     if data.check_ban(id):
         return send_file("errors/banned.png")
     elif data.basic_check(id, unix):
@@ -51,7 +48,8 @@ def beg(id, unix):
         return send_file("finished/beg_image.png")
 
 @app.route('/search/<int:id>/<int:unix>', methods=['GET'])
-def search(id, unix):
+async def search(id, unix):
+    """The search command"""
     if data.check_ban(id):
         return send_file("errors/banned.png")
     elif data.basic_check(id, unix):
@@ -62,7 +60,8 @@ def search(id, unix):
         return "Approved, do stuff"
 
 @app.route('/shop/<int:unix>/<int:page_number>', methods=['GET'])
-def shop(unix, page_number):
+async def shop(unix, page_number):
+    """Shop command for viewing items"""
     if data.check_ban(id):
         return send_file("errors/banned.png")
     elif data.basic_check(id, unix):
@@ -73,7 +72,8 @@ def shop(unix, page_number):
         return "Approved, do stuff"
 
 @app.route('/buy/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
-def buy(id, unix, item, amount):
+async def buy(id, unix, item, amount):
+    """Buy items from the shop"""
     if data.check_ban(id):
         return send_file("errors/banned.png")
     elif data.basic_check(id, unix):
@@ -84,7 +84,8 @@ def buy(id, unix, item, amount):
         return "Approved, do stuff"
 
 @app.route('/sell/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
-def sell(id, unix, item, amount):
+async def sell(id, unix, item, amount):
+    """Sell items to the shop"""
     if data.check_ban(id):
         return send_file("errors/banned.png")
     elif data.basic_check(id, unix):
@@ -95,7 +96,8 @@ def sell(id, unix, item, amount):
         return "Approved, do stuff"
 
 @app.route('/use/<int:id>/<int:unix>/<string:item>/<int:amount>', methods=['GET'])
-def sell(id, unix, item, amount):
+async def use(id, unix, item, amount):
+    """Use an item if it has a use."""
     if data.check_ban(id):
         return send_file("errors/banned.png")
     elif data.basic_check(id, unix):
@@ -105,6 +107,17 @@ def sell(id, unix, item, amount):
     else:
         return "Approved, do stuff"
 
+@app.route("/info/<int:id>/<int:unix>/<string:item>", methods="GET")
+async def info(id, unix, item, amount):
+    """Get info on a given item"""
+    if data.check_ban(id):
+        return send_file("errors/banned.png")
+    elif data.basic_check(id, unix):
+        return send_file("errors/tag_altered.png")
+    elif data.check_user(id):
+        return send_file("finished/new_user.png")
+    else:
+        item_info = await data.get_item(id, item)
 
 def run():
     """The run function that runs the app"""
@@ -114,17 +127,16 @@ def run():
 server = Thread(target=run)
 server.start()
 
-
 async def keep_alive():
     """A coroutine to keep the api alive, hopefully...
     Doesn't always work, not even sure if this is correct syntax but it works :p"""
     while 1:
         urllib.request.urlopen("https://carlmemer.tagscript1.repl.co")
         try:
-            import pymongo
+            import motor
         except:
-            os.system("pip install pymongo[srv]")
-            import pymongo
+            os.system("pip install motor")
+            import motor
 
         await asyncio.sleep(150) # 150 Seconds or 2:30 min, sec
 
