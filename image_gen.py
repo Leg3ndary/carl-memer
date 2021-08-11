@@ -10,7 +10,7 @@ font_dict = { # just a small dict so we can add fonts quickly without much fuss 
     "light": "fonts/light.otf"
 }
 
-def get_font(type, size=18):
+async def get_font(type, size=18):
     """We have many fonts available too us, so to simplify things we got a nice simple get function to retrieve fonts for us
     Though currently we only use 2 of them :p"""
     if type not in font_dict:
@@ -18,13 +18,13 @@ def get_font(type, size=18):
     font = ImageFont.truetype(font_dict[type], size)
     return font
 
-def create_canvas(size=(400, 300)):
+async def create_canvas(size=(400, 300)):
     """Clear the background or make a new canvas, call it what you want
     does the same thing, used to generate new size canvases for better image creation"""
     blank = Image.new(mode="RGBA", size=size, color=(48, 52, 52, 0))
     blank.save("images/blank_canvas.png")
 
-def thumbnail_magic(thumbnail):
+async def thumbnail_magic(thumbnail):
     """Resizing thumbnail if the requested image isn't already the right shape"""
     canvas = Image.open(thumbnail)
 
@@ -35,7 +35,7 @@ def thumbnail_magic(thumbnail):
 
     canvas_resize.save(thumbnail) # voila done
 
-def create_image(filepath, thumbnail, title, description):
+async def create_image(filepath, thumbnail, title, description):
     """Creating an image to use, autoresizes to the size we need..."""
 
     y_canvas = 24 + (len(description) * 18)
@@ -47,8 +47,8 @@ def create_image(filepath, thumbnail, title, description):
 
     canvas = Image.open("images/blank_canvas.png")
 
-    semibold = get_font("semibold")
-    light = get_font("light")
+    semibold = await get_font("semibold")
+    light = await get_font("light")
     
     canvas_write = ImageDraw.Draw(canvas)
     canvas_write.text((0, -5), title, font=semibold)
@@ -65,5 +65,6 @@ def create_image(filepath, thumbnail, title, description):
 
     canvas.save(filepath)
 
-def create_gif(filepath, thumbnail, ):
+async def create_gif(filepath, thumbnail, ):
+    """Create a gif, forgot what I wanted to do with this originally lol"""
     pass

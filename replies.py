@@ -9,7 +9,8 @@ beg_replies = {
     "Carl-bot": {
         "success": [
             "Go buy yourself some subway",
-            "Go buy Carl-bot premium and be cool"
+            "Go buy Carl-bot premium and be cool",
+            "Sure, I'm feeling nice today"
         ],
         "fail": [
             "Boop, Beep, you are sheet",
@@ -21,7 +22,8 @@ beg_replies = {
     "Discord Mod": {
         "success": [
             "I like you, sure",
-            "I'm feeling generous, fine"
+            "I'm feeling generous, fine",
+            "Get me some subway later then"
         ],
         "fail": [
             "I hate you, loser",
@@ -33,17 +35,19 @@ beg_replies = {
     "God": {
         "success": [
             "Fine, leave me alone, I'm busy",
-            ""
+            "Do not sin."
         ],
         "fail": [
-            'I said "Let there be light" not beggars',
-            "I'm don't have any change sorry"
+            'I said "Let there be light", not beggars',
+            "I'm don't have any change sorry",
+            "Go atone for your sins",
+            "I don't remember you praying to me..."
         ]
     },
     "Old Friend": {
         "success": [
             "Sure, sure, I can hook you up",
-            ""
+            "Whatever my bro wants..."
         ],
         "fail": [
             "Who are you again...",
@@ -89,7 +93,7 @@ search_replies = {
         ],
         "fail": [
             "You opened a troll virus that shut down your computer.",
-            "You found Free_Nitro_2017_[100% LEGIT].mp4",
+            "You found Free_Nitro_2017_[TOTALLY LEGIT].mp4",
             "Your computer froze.",
             "Your computer crashed."
         ]
@@ -125,7 +129,7 @@ pickup_replies = {
 
 }
 
-def get_reply(r_type: str, wrap=48):
+async def get_reply(r_type: str, wrap=48):
     """Gets a reply upon given type, also wraps text, default 290"""
     r_type = r_type.lower()
     
